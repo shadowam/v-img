@@ -1,6 +1,6 @@
 {
-  "name": "v-img",
-  "version": "0.2.0",
+  "name": "@shadowam/v-img",
+  "version": "0.1.0",
   "description": "Vuejs plugin for image viewing",
   "main": "dist/v-img.js",
   "module": "dist/v-img.mjs",
@@ -11,7 +11,10 @@
     "build": "cross-env NODE_ENV=production rollup -c",
     "watch": "cross-env NODE_ENV=development rollup -c -w"
   },
-  "repository": "https://github.com/crowdbotics/v-img",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crowdbotics/v-img.git"
+  },
   "keywords": [
     "vue",
     "images",
@@ -21,7 +24,6 @@
     "vue image gallery"
   ],
   "license": "MIT",
-  "bugs": {},
   "files": [
     "lib",
     "dist"
@@ -48,5 +50,11 @@
     "rollup-plugin-vue": "^2.4.1",
     "rollup-watch": "^4.3.1",
     "uglify-es": "^3.0.28"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "bugs": {
+    "url": "https://github.com/crowdbotics/v-img/issues"
   }
 }
