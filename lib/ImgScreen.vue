@@ -5,7 +5,7 @@
     prettier settings since I'm using prettier-eslint
    -->
   <transition appear name="v-img-fade">
-    <div v-if="!closed" class="fullscreen-v-img" @click.self="close">
+    <div v-if="!closed" class="fullscreen-v-img">
       <!--
         Count of total images in array and current position.
         We're showing wrapper element of this counter just to
@@ -50,7 +50,7 @@
           </svg>
         </span>
       </transition>
-      <!-- Constols end -->
+      <!-- Controls end -->
 
       <div class="footer-v-img" v-if="thumbnails && images.length > 1">
         <img
@@ -62,7 +62,7 @@
       </div>
 
       <div class="content-v-img">
-        <img :src="images[currentImageIndex]" @click="next">
+        <img :src="images[currentImageIndex]">
       </div>
 
     </div>
@@ -90,6 +90,7 @@ export default {
         this.handlers.closed();
       }
       if (!newVal && this.handlers.opened) {
+        document.querySelector('body').style.overflow = 'hidden';
         this.handlers.opened();
       }
     },
@@ -107,6 +108,7 @@ export default {
     close() {
       if (!this.closed) {
         document.querySelector('body').classList.remove('body-fs-v-img');
+        document.querySelector('body').style.overflow = 'auto';
         this.images = [];
         this.currentImageIndex = 0;
         this.closed = true;
@@ -158,12 +160,12 @@ export default {
       // arrow left and 'h' key (vim-like binding)
       if (e.keyCode === 37 || e.keyCode === 72) this.prev();
     });
-    window.addEventListener('scroll', () => {
-      this.close();
-    });
-    window.addEventListener('mousemove', () => {
-      this.showUI();
-    });
+    // window.addEventListener('scroll', () => {
+    //   this.close();
+    // });
+    // window.addEventListener('mousemove', () => {
+    //   this.showUI();
+    // });
   },
 };
 </script>
@@ -208,7 +210,7 @@ export default {
 .footer-v-img {
   position: absolute;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.15);
   height: 50px;
   z-index: 9999;
   display: flex;
@@ -284,7 +286,7 @@ export default {
 .buttons-v-img span {
   cursor: pointer;
   color: #e5e6eb;
-  font-size: 30px;
+  font-size: 50px;
   -webkit-transition: color 0.4s ease-in-out;
   transition: color 0.4s ease-in-out;
   text-decoration: none;
@@ -292,12 +294,13 @@ export default {
 }
 
 .buttons-v-img span:not(:last-child) {
-  margin-right: 8px;
+  margin-right: 25px;
 }
 
 .buttons-v-img span svg {
-  height: 20px;
-  width: 15px;
+  height: 25px;
+  width: 25px;
+  margin-bottom: 4px;
 }
 
 .buttons-v-img span:hover svg path {
@@ -311,38 +314,41 @@ export default {
 .prev-v-img svg,
 .next-v-img svg {
   margin: 5px auto;
+  position: relative;
+  top: calc(50% - 50px);
 }
 
 .prev-v-img,
 .next-v-img {
   color: white;
-  width: 35px;
-  height: 35px;
+  width: 60px;
+  height: calc(100% - 50px);
+  top: 50px;
   position: absolute;
-  top: 50%;
-  margin-top: -12.5px;
+  /* top: 50%;
+  margin-top: -12.5px; */
   font-size: 15px;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.3);
+  /* background-color: rgba(0, 0, 0, 0.5); */
   z-index: 1000;
-  opacity: 0.3;
-  -webkit-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
+  opacity: 0.15;
+  -webkit-transition: opacity 0.15s ease-in-out;
+  transition: opacity 0.15s ease-in-out;
   cursor: pointer;
 }
 
-.prev-v-img:hover,
+/* .prev-v-img:hover,
 .next-v-img:hover {
   opacity: 1;
-}
+} */
 
 .prev-v-img {
-  left: 10px;
+  left: 0;
 }
 
 .next-v-img {
-  right: 10px;
+  right: 0;
 }
 
 .v-img-fade-enter,
@@ -352,7 +358,7 @@ export default {
 
 .v-img-fade-enter-active,
 .v-img-fade-leave-active {
-  -webkit-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
+  -webkit-transition: opacity 0.15s ease-in-out;
+  transition: opacity 0.15s ease-in-out;
 }
 </style>
