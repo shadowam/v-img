@@ -267,7 +267,7 @@ export default {
 }
 
 .count-v-img {
-  font-size: 15px;
+  font-size: 26px;
   color: white;
   margin-left: 10px;
 }
